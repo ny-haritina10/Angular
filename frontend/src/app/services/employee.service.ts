@@ -11,10 +11,32 @@ export class EmployeeService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = 'http://localhost:8080/api/employees';
 
-  getEmployees(page: number = 0, size: number = 10): Observable<ApiResponse> {
-    const params = new HttpParams()
+   getEmployees(
+    page: number = 0,
+    size: number = 10,
+    filters: {
+      minHireDate?: string;
+      maxHireDate?: string;
+      name?: string;
+      departmentId?: number;
+    } = {}
+  ): Observable<ApiResponse> {
+    let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
+
+    if (filters.minHireDate) {
+      params = params.set('minHireDate', filters.minHireDate);
+    }
+    if (filters.maxHireDate) {
+      params = params.set('maxHireDate', filters.maxHireDate);
+    }
+    if (filters.name) {
+      params = params.set('name', filters.name);
+    }
+    if (filters.departmentId) {
+      params = params.set('departmentId', filters.departmentId.toString());
+    }
 
     return this.http.get<ApiResponse>(this.apiUrl, { params });
   }
