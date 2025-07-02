@@ -1,0 +1,20 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
+}
+button {
+  padding: 8px 16px;
+  margin: 0 5px;
+}
+button:disabled {
+  opacity: 0.5;
+}
